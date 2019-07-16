@@ -10,7 +10,20 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// front panel
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+//back panel
+Route::get('/admin', function () {
+    return view('auth/adminlogin');
+});
+
+Route::get('/dashboard', 'AdminController@index')->name('dashboard');
+
+Route::get('{path}', 'HomeController@index')->where( 'path' , '([A-z\d\-\/_.]+)?' );
